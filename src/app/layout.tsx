@@ -1,3 +1,4 @@
+import { Providers } from "@/components/providers";
 import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
@@ -5,7 +6,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Noted",
@@ -29,9 +30,12 @@ export default function RootLayout({
     >
       <html lang="en" suppressHydrationWarning>
         <body
-          className={cn("min-h-screen font-sans antialiased", inter.className)}
+          className={cn(
+            "min-h-screen font-sans antialiased",
+            fontSans.variable
+          )}
         >
-          {children}
+          <Providers>{children}</Providers>
         </body>
       </html>
     </ClerkProvider>

@@ -1,24 +1,24 @@
-import { Editor } from "@/components/editor/Editor";
-import { Header } from "@/components/header";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { CollaborativeRoom } from "@/components/collaborative-room";
+import { getDocument } from "@/lib/actions/room.actions";
+import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-export default function Document() {
+export default async function Document({ params: { id } }: SearchParamProps) {
+  let clerkUser = await currentUser();
+  if (!clerkUser) redirect("/sign-in");
+
+  let room = await getDocument({
+    roomId: id,
+    userId: clerkUser.emailAddresses[0].emailAddress,
+  });
+
+  if (!room) {
+    redirect("/");
+  }
+
   return (
-    <div>
-      <Header>
-        <div className="gap-2 flex w-fit items-center justify-center">
-          <p className="document-title">My Title</p>
-        </div>
-
-        <SignedOut>
-          <SignInButton />
-        </SignedOut>
-
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-      </Header>
-      <Editor />
-    </div>
+    <main className="flex w-full flex-col items-center">
+      <CollaborativeRoom roomId={id} roomMetadata={room.metadata} />
+    </main>
   );
 }
