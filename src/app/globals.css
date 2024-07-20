@@ -303,7 +303,7 @@
 
 .lb-composer-editor :where([data-placeholder]) {
   color: #b4c6ee;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .lb-lexical-floating-threads-thread:where([data-resolved]) {

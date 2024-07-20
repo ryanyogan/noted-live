@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
@@ -26,7 +27,11 @@ import FloatingToolbarPlugin from "./plugins/floating-toolbar-plugin";
 // try to recover gracefully without losing user data.
 
 function Placeholder() {
-  return <div className="editor-placeholder">Get started...</div>;
+  return (
+    <div className={cn("editor-placeholder", "text-slate-500")}>
+      Start typing...
+    </div>
+  );
 }
 
 export function Editor({
