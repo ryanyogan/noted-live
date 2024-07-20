@@ -49,6 +49,7 @@ export async function getDocument({
       throw new Error("You don't have access to this document");
     }
 
+    // return room;
     return parseStringify(room);
   } catch (error) {
     console.log(`Error fetching document/room: ${error}`);

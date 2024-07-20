@@ -1,16 +1,9 @@
-import Image from "next/image";
+import { Loader2 } from "lucide-react";
 
 export function Loader() {
   return (
     <div className="loader">
-      <Image
-        src="/assets/icons/loader.svg"
-        alt="Loading"
-        width={32}
-        height={32}
-        className="animate-spin"
-      />
-      Loading...
+      <Loader2 className="size-8 text-blue-200 animate-spin" />
     </div>
   );
 }

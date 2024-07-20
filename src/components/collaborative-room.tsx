@@ -3,6 +3,7 @@
 import { updateDocument } from "@/lib/actions/room.actions";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { ClientSideSuspense, RoomProvider } from "@liveblocks/react/suspense";
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ActiveCollaborators } from "./active-collaborators";
@@ -101,7 +102,7 @@ export function CollaborativeRoom({
                   alt="edit"
                   height={24}
                   width={24}
-                  className="pointer"
+                  className="cursor-pointer"
                   onClick={() => setEditing(true)}
                 />
               )}
@@ -110,7 +111,7 @@ export function CollaborativeRoom({
                 <p className="view-only-tag">View only</p>
               )}
 
-              {loading && <p className="text-sm text-gray-400">saving...</p>}
+              {loading && <Loader2 className="size-4 animate-spin" />}
             </div>
 
             <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
@@ -125,7 +126,7 @@ export function CollaborativeRoom({
               </SignedIn>
             </div>
           </Header>
-          <Editor />
+          <Editor roomId={roomId} currentUserType={currentUserType} />
         </div>
       </ClientSideSuspense>
     </RoomProvider>
